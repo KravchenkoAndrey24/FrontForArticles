@@ -1,0 +1,68 @@
+import {authAPI, RegistrationDataType} from "../api/API";
+import {Dispatch} from "redux";
+import {setAppStatusAC} from "./appReducer";
+import {setIsAuth} from "./isAuthReducer";
+
+
+export enum ACTION_TYPES {
+    SET_DATA = "SET_DATA"
+}
+
+export type ProfileActionsType = ReturnType<typeof setUserData>
+
+let initialState = {
+    id: 0,
+    email: '',
+    name: ''
+};
+
+type initialStateType = typeof initialState;
+
+export const userDataReducer = (state: initialStateType = initialState, action: ProfileActionsType): initialStateType => {
+    switch (action.type) {
+        case ACTION_TYPES.SET_DATA:
+            return { ...action.dataUser};
+        default:
+            return state
+    }
+}
+
+export const setUserData = (dataUser: initialStateType) => ({ type: ACTION_TYPES.SET_DATA, dataUser } as const)
+
+export const registrationTC = (data: RegistrationDataType) => (dispatch: Dispatch) => {
+    dispatch(setAppStatusAC('loading'))
+    authAPI.registration(data).then(res => {
+        dispatch(setUserData(res))
+        dispatch(setIsAuth(true))
+        dispatch(setAppStatusAC('succeeded'))
+    }).catch((error:any) => {
+        dispatch(setAppStatusAC('succeeded'))
+    })
+}
+
+export const loginTC = (data: RegistrationDataType) => (dispatch: Dispatch) => {
+    dispatch(setAppStatusAC('loading'))
+    authAPI.login(data)
+        .then((res) => {
+            dispatch(setUserData(res))
+            dispatch(setIsAuth(true))
+            dispatch(setAppStatusAC('succeeded'))
+        })
+        .catch((err) => {
+            dispatch(setAppStatusAC('succeeded'))
+        })
+}
+
+export const logoutTC = () => (dispatch: Dispatch) => {
+    dispatch(setAppStatusAC('loading'))
+    authAPI.logout()
+        .then((res) => {
+            dispatch(setIsAuth(false))
+            dispatch(setAppStatusAC('succeeded'))
+        })
+        .catch((error) => {
+            console.log(error)
+            dispatch(setAppStatusAC('succeeded'))
+        })
+}
+
