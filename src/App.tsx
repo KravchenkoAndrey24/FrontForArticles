@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import './App.module.css';
 import {Route, Switch, useLocation} from "react-router-dom";
 import Registration from './components/Registration';
-import {Articles} from "./components/Articles";
+import {Todolist} from "./components/todolist/Todolist";
 import { Login } from './components/Login';
 import style from './App.module.css'
 import Navbar from './components/Navbar';
@@ -13,11 +13,12 @@ import {AppStateType} from "./redux/reduxStore";
 import { setIsAuth } from './redux/isAuthReducer';
 import axios from 'axios';
 import {setUserData} from "./redux/userDataReducer";
+import {setAppStatusAC} from "./redux/appReducer";
 
 export const PATH = {
     registration: '/registration',
     login: '/login',
-    articles: '/articles'
+    todolist: '/todolist'
 }
 
 function App() {
@@ -44,9 +45,7 @@ function App() {
               dispatch(setUserData(res.data))
           })
           dispatch(setIsAuth(true))
-        } else {
         }
-
     }, [rawToken]);
 
   
@@ -57,7 +56,7 @@ function App() {
       <Switch>
           <Route path={PATH.registration} render={() => <Registration />} />
           <Route path={PATH.login} render={() => <Login />} />
-          <Route path={PATH.articles} render={() => <Articles />} />
+          <Route path={PATH.todolist} render={() => <Todolist />} />
           <Redirect to={PATH.login} />
       </Switch>
     </div>

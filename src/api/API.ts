@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { todoItemBodyType } from '../redux/todolistReducer';
 
 // const instance = axios.create({
 //     baseURL: 'http://localhost:3000/',
@@ -25,7 +26,6 @@ export const authAPI = {
               localStorage.setItem('token', JSON.stringify(res.headers))
               token.set(res.headers);
               return  res.data.data
-          }).catch(err =>{
           })
     },
     login(data: RegistrationDataType) {
@@ -37,9 +37,6 @@ export const authAPI = {
             })
     },
     logout(){
-        //@ts-ignore
-        const localToken = JSON.parse(localStorage.getItem('token'))
-        token.set(localToken)
         return axios.delete('api/v1/auth/sign_out').then(res => {
             localStorage.clear()
         }).catch(err => {
@@ -54,36 +51,41 @@ export const authAPI = {
             localStorage.clear()
             token.unset()
         }
-        return axios.get('current_user', {withCredentials: true}).then(res => {
+        return axios.get('current_user', ).then(res => {
             return res.data
         }).catch(err => {
-            token.unset()
             localStorage.clear()
             return Promise.reject()
         })
     }
 }
 
-export const articlesApi = {
-    getArticles(){
-        return axios.get('articles')
+export const todolistApi = {
+    getTokenFromLocal() {
+        const localRawToken = localStorage.getItem('token')
+        if(localRawToken) {
+            const localToken = JSON.parse(localRawToken)
+            token.set(localToken)
+        }
     },
-    addArticle(articleBody: ArticleBodyType){
-        return axios.post('articles', {...articleBody})
+    getTodolist(){
+        this.getTokenFromLocal()
+        return  axios.get("api/v1/todo_items")
     },
-    deleteArticle(articleId: number) {
-        return axios.delete(`articles/${articleId}`)
+    addTodoItem(todoItemBody : todoItemBodyType){
+        this.getTokenFromLocal()
+        return axios.post('api/v1/todo_items', todoItemBody)
+    },
+    deleteTodoItem(todoItemId: number) {
+        this.getTokenFromLocal()
+        return axios.delete(`api/v1/todo_items/${todoItemId}`)
+    },
+    updateTodoItem(todoItemId: number, edit_complete: boolean, edit_title: string, ) {
+        return axios.put(`api/v1/todo_items/${todoItemId}`, {edit_complete, edit_title })
     }
 }
 
 export type RegistrationDataType = {
     email: string
     password: string
-}
-
-
-export type ArticleBodyType = {
-    user_id: number
-    title: string
-    body: string
 }

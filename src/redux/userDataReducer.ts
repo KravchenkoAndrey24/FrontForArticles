@@ -1,6 +1,6 @@
 import {authAPI, RegistrationDataType} from "../api/API";
 import {Dispatch} from "redux";
-import {setAppStatusAC} from "./appReducer";
+import {setAppStatusAC, setErrorsAC} from "./appReducer";
 import {setIsAuth} from "./isAuthReducer";
 
 
@@ -35,7 +35,8 @@ export const registrationTC = (data: RegistrationDataType) => (dispatch: Dispatc
         dispatch(setUserData(res))
         dispatch(setIsAuth(true))
         dispatch(setAppStatusAC('succeeded'))
-    }).catch((error:any) => {
+    }).catch((error) => {
+        dispatch(setErrorsAC(error.response.data.errors.full_messages[0]))
         dispatch(setAppStatusAC('succeeded'))
     })
 }
@@ -48,7 +49,8 @@ export const loginTC = (data: RegistrationDataType) => (dispatch: Dispatch) => {
             dispatch(setIsAuth(true))
             dispatch(setAppStatusAC('succeeded'))
         })
-        .catch((err) => {
+        .catch((error) => {
+            dispatch(setErrorsAC(error.response.data.errors[0]))
             dispatch(setAppStatusAC('succeeded'))
         })
 }

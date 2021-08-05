@@ -133,3 +133,20 @@
 .logisterButton:active {
     background-color: #080b44;
 }
+.signInGit {
+    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 260px;
+    color: white;
+    height: 35px;
+    background: #2f36ae;
+    margin: 20px auto 30px;
+    border-radius: 30px;
+    cursor: pointer;
+    border: 0;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+}
