@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import style from './Login.module.css';
 import { useDispatch, useSelector } from "react-redux";
 import {NavLink, Redirect } from 'react-router-dom';
@@ -10,22 +10,18 @@ import { loginTC } from '../redux/userDataReducer';
 import {setErrorsAC} from "../redux/appReducer";
 
 export const Login = () => {
-
     const dispatch = useDispatch()
     const isAuth = useSelector<AppStateType, boolean>(state => state.isAuth.isAuth)
     const resError = useSelector<AppStateType, string>(state => state.app.error)
-
     const {
         register,
         handleSubmit,
         formState: {errors},
         reset
     } = useForm()
-    
     if (isAuth) {
         return <Redirect to={PATH.todolist} />
     }
-
     const setUserData = (data: RegistrationDataType) => {
         dispatch(loginTC(data))
         reset()
@@ -61,5 +57,5 @@ export const Login = () => {
                     </div>
                 </div>
             </div>
-    </>);
+        </>);
 }

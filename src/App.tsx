@@ -13,7 +13,6 @@ import {AppStateType} from "./redux/reduxStore";
 import { setIsAuth } from './redux/isAuthReducer';
 import axios from 'axios';
 import {setUserData} from "./redux/userDataReducer";
-import {setAppStatusAC} from "./redux/appReducer";
 
 export const PATH = {
     registration: '/registration',
@@ -30,7 +29,8 @@ function App() {
  
     useEffect(() => {
         if(rawToken){
-            localStorage.setItem('token', rawToken)
+            const decodeToken = atob(rawToken)
+            localStorage.setItem('token', decodeToken)
         }
         const localRawToken = localStorage.getItem('token')
         if(localRawToken){
@@ -42,9 +42,12 @@ function App() {
               'uid': token.uid,
               'token-type': 'Bearer'  
           }}).then(res => {
-              dispatch(setUserData(res.data))
-          })
-          dispatch(setIsAuth(true))
+              dispatch(setUserData(res.data));
+              dispatch(setIsAuth(true))
+          }).catch(err => {
+              dispatch(setIsAuth(false));
+              localStorage.clear()
+            })
         }
     }, [rawToken]);
 

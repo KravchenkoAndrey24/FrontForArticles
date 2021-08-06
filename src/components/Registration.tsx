@@ -1,10 +1,9 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import style from  './Registration.module.css'
 import { Redirect } from 'react-router';
 import { AppStateType } from '../redux/reduxStore';
 import { PATH } from '../App';
-
 import {useForm} from "react-hook-form";
 import {RegistrationDataType} from "../api/API";
 import { registrationTC } from '../redux/userDataReducer';
@@ -15,25 +14,19 @@ const Registration = () => {
     const dispatch = useDispatch();
     const isAuth = useSelector<AppStateType, boolean>(state => state.isAuth.isAuth)
     const resError = useSelector<AppStateType, string>(state => state.app.error)
-
     const {
         register,
         handleSubmit,
         formState: {errors},
         reset
     } = useForm()
-
-
     const sendRegistrationData = (data: RegistrationDataType) => {
         dispatch(registrationTC(data))
         reset()
     }
-
     if (isAuth) {
         return <Redirect to={PATH.todolist} />
     }
-
-
     return (
         <div className={style.main}>
             <div className={style.mainBlock}>
