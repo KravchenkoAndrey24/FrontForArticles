@@ -47,7 +47,7 @@ export const Login = () => {
                             <input onFocus={()=>{dispatch(setErrorsAC(''))}} placeholder='Enter your password' type='password' {...register('password', {required: true, minLength: 6})}/>
                         </div>
                         <button className={style.loginButton} type={'submit'}>Sign in</button>
-                        <a className={style.signInGit} href="http://localhost:3000/api/v1/auth/github">Sign in with GitHub</a>
+                        <a className={style.signInGit} href="https://shrouded-caverns-92109.herokuapp.com/api/v1/auth/github">Sign in with GitHub</a>
                     </form>
                     <div className={style.askAboutAccount}>
                         <span>Don’t have an account?</span>
