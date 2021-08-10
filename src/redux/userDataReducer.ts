@@ -1,7 +1,7 @@
 import {authAPI, RegistrationDataType} from "../api/API";
 import {Dispatch} from "redux";
 import {setAppStatusAC, setErrorsAC} from "./appReducer";
-import {setIsAuth} from "./isAuthReducer";
+import {setIsAuth, setIsRedirect} from "./isAuthReducer";
 
 
 export enum ACTION_TYPES {
@@ -35,9 +35,11 @@ export const registrationTC = (data: RegistrationDataType) => (dispatch: Dispatc
         dispatch(setUserData(res))
         dispatch(setIsAuth(true))
         dispatch(setAppStatusAC('succeeded'))
+        dispatch(setIsRedirect(true))
     }).catch((error) => {
-        dispatch(setErrorsAC(error.response.data.errors.full_messages[0]))
+        dispatch(setErrorsAC(error.response.data?.errors?.full_messages[0]))
         dispatch(setAppStatusAC('succeeded'))
+        dispatch(setIsRedirect(true))
     })
 }
 
@@ -48,10 +50,13 @@ export const loginTC = (data: RegistrationDataType) => (dispatch: Dispatch) => {
             dispatch(setUserData(res))
             dispatch(setIsAuth(true))
             dispatch(setAppStatusAC('succeeded'))
+            dispatch(setIsRedirect(true))
         })
         .catch((error) => {
-            dispatch(setErrorsAC(error.response.data.errors[0]))
+            dispatch(setErrorsAC(error.response.data?.errors[0]))
             dispatch(setAppStatusAC('succeeded'))
+            dispatch(setIsAuth(false))
+            dispatch(setIsRedirect(true))
         })
 }
 
@@ -59,12 +64,13 @@ export const logoutTC = () => (dispatch: Dispatch) => {
     dispatch(setAppStatusAC('loading'))
     authAPI.logout()
         .then((res) => {
+            dispatch(setIsRedirect(true))
             dispatch(setIsAuth(false))
             dispatch(setAppStatusAC('succeeded'))
         })
         .catch((error) => {
-            console.log(error)
             dispatch(setAppStatusAC('succeeded'))
+            dispatch(setIsRedirect(true))
         })
 }
 

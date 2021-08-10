@@ -1,9 +1,6 @@
 import axios from 'axios'
 import { todoItemBodyType } from '../redux/todolistReducer';
 
-// const instance = axios.create({
-//     baseURL: 'http://localhost:3000/',
-// })
 
 // axios.defaults.baseURL = 'http://localhost:3000/';
 axios.defaults.baseURL = 'https://shrouded-caverns-92109.herokuapp.com/';
@@ -13,12 +10,7 @@ const token = {
     set(token: any) {
         axios.defaults.headers = {...token};
     },
-    unset() {
-        // axios.defaults.headers = '';
-    },
 };
-
-
 
 export const authAPI = {
     registration(data: RegistrationDataType) {
@@ -49,7 +41,6 @@ export const authAPI = {
             token.set(tokenLocal);
         } else {
             localStorage.clear()
-            token.unset()
         }
         return axios.get('current_user', ).then(res => {
             return res.data

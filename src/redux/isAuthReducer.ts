@@ -1,13 +1,15 @@
 
 
 export enum ACTION_TYPES {
-    IS_AUTH = "IS_AUTH"
+    IS_AUTH = "IS_AUTH",
+    IS_REDIRECT = 'IS_REDIRECT '
 }
 
-export type ProfileActionsType = ReturnType<typeof setIsAuth>
+export type ProfileActionsType = ReturnType<typeof setIsAuth> | ReturnType<typeof setIsRedirect>
 
 let initialState = {
     isAuth: false,
+    isRedirect: false
 };
 
 type initialStateType = typeof initialState;
@@ -18,12 +20,17 @@ const authReducer = (state: initialStateType = initialState, action: ProfileActi
             return {
                 ...state, isAuth: action.isAuth
             };
+        case ACTION_TYPES.IS_REDIRECT:
+            return {
+                ...state, isRedirect: action.isRedirect
+            };
         default:
             return state
     }
 }
 
 export const setIsAuth = (isAuth: boolean) => ({ type: ACTION_TYPES.IS_AUTH, isAuth } as const)
+export const setIsRedirect = (isRedirect: boolean) => ({ type: ACTION_TYPES.IS_REDIRECT, isRedirect } as const)
 
 
 

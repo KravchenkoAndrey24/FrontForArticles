@@ -12,17 +12,17 @@ import {setTodolistTC, TodolistType} from "../../redux/todolistReducer";
 export const Todolist = () => {
 
     const dispatch = useDispatch()
-    const currentUserEmail = useSelector<AppStateType, string>(state => state.userData.email)
     const [hideCompletedTodoItems, setHideCompletedTodoItems] = useState(false)
     const isAuth = useSelector<AppStateType, boolean>(state=>state.isAuth.isAuth);
     const state = useSelector<AppStateType, TodolistType[]>(state => state.todolist)
+    const isRedirect = useSelector<AppStateType, boolean>(state => state.isAuth.isRedirect);
 
     useEffect(()=>{
-        if(isAuth){
             dispatch(setTodolistTC());
-        }
-    }, [dispatch, isAuth])
-    if(!isAuth){
+    }, [dispatch])
+
+
+    if(isRedirect && !isAuth){
         return <Redirect to={PATH.login} />
     }
     const toggleCompletedTodoItems = () => setHideCompletedTodoItems(prev => !prev)

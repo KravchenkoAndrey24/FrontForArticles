@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import style from './Login.module.css';
 import { useDispatch, useSelector } from "react-redux";
 import {NavLink, Redirect } from 'react-router-dom';
@@ -13,13 +13,18 @@ export const Login = () => {
     const dispatch = useDispatch()
     const isAuth = useSelector<AppStateType, boolean>(state => state.isAuth.isAuth)
     const resError = useSelector<AppStateType, string>(state => state.app.error)
+    const isRedirect = useSelector<AppStateType, boolean>(state => state.isAuth.isRedirect);
+
     const {
         register,
         handleSubmit,
         formState: {errors},
         reset
     } = useForm()
-    if (isAuth) {
+
+
+
+    if (isRedirect && isAuth) {
         return <Redirect to={PATH.todolist} />
     }
     const setUserData = (data: RegistrationDataType) => {

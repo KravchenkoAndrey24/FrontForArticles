@@ -14,6 +14,8 @@ const Registration = () => {
     const dispatch = useDispatch();
     const isAuth = useSelector<AppStateType, boolean>(state => state.isAuth.isAuth)
     const resError = useSelector<AppStateType, string>(state => state.app.error)
+    const isRedirect = useSelector<AppStateType, boolean>(state => state.isAuth.isRedirect);
+
     const {
         register,
         handleSubmit,
@@ -24,7 +26,7 @@ const Registration = () => {
         dispatch(registrationTC(data))
         reset()
     }
-    if (isAuth) {
+    if (isRedirect && isAuth) {
         return <Redirect to={PATH.todolist} />
     }
     return (

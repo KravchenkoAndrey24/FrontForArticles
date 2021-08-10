@@ -1,18 +1,16 @@
 import React, {useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {addTodoItemTC} from "../../redux/todolistReducer";
-import {AppStateType} from "../../redux/reduxStore";
 
 
 export const TodoForm = () => {
 
     const dispatch = useDispatch();
-    const user_id = useSelector<AppStateType, number>(state=>state.userData.id)
     const [itemTitle, setItemTitle] = useState<string>('')
 
 
     const createNewTodoItem = () => {
-        dispatch(addTodoItemTC({title:itemTitle, complete: false, user_id}))
+        dispatch(addTodoItemTC({title: itemTitle, complete: false}))
         setItemTitle('')
     }
 

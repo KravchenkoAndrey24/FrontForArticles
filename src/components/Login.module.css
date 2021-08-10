@@ -135,28 +135,27 @@
 .askAboutAccount span {
     padding: 4px;
 }
-/*.askAboutAccount span:hover {*/
-/*    border-radius: 15px;*/
-/*    cursor: pointer;*/
-/*    background-color: #e5e5e5;*/
-/*}*/
 
 .singUp {
     margin: 10px 0 30px 0;
     cursor: pointer;
 }
 .singUp span {
-    padding: 5px;
 }
 .singUp a {
     text-decoration: none;
     color: black;
+    display: inline-block;
+    padding: 4px;
 }
-
-.singUp span:hover {
-    border-radius: 15px;
-    cursor: pointer;
+.singUp a:hover {
+    text-decoration: none;
+    color: black;
     background-color: #e5e5e5;
+    border-radius: 20px;
+}
+.singUp span:hover {
+    cursor: pointer;
 }
 .formError {
     display: block;

@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import { setAppStatusAC } from "./appReducer";
 import {todolistApi} from "../api/API";
+import {setIsRedirect} from "./isAuthReducer";
 
 export enum ACTION_TYPES {
     SET_TODOLIST = "SET_TODOLIST",
@@ -60,8 +61,10 @@ export const setTodolistTC = () => (dispatch: Dispatch) => {
     todolistApi.getTodolist().then(res => {
         dispatch(setTodolistAC(res.data))
         dispatch(setAppStatusAC('succeeded'))
+        dispatch(setIsRedirect(true))
     }).catch( err => {
         dispatch(setAppStatusAC('succeeded'))
+        dispatch(setIsRedirect(true))
         }
     )
 }
@@ -71,8 +74,10 @@ export const addTodoItemTC = (todoItemBody: todoItemBodyType) => (dispatch: Disp
     todolistApi.addTodoItem(todoItemBody).then(res => {
         dispatch(addTodoItemAC(res.data))
         dispatch(setAppStatusAC('succeeded'))
+        dispatch(setIsRedirect(true))
     }).catch( err => {
         dispatch(setAppStatusAC('succeeded'))
+        dispatch(setIsRedirect(true))
         }
     )
 }
@@ -82,8 +87,10 @@ export const deleteArticleTC = (todoItemId: number) => (dispatch: Dispatch) => {
     todolistApi.deleteTodoItem(todoItemId).then(res => {
         dispatch(deleteTodoItemAC(todoItemId))
         dispatch(setAppStatusAC('succeeded'))
+        dispatch(setIsRedirect(true))
     }).catch(err => {
         dispatch(setAppStatusAC('succeeded'))
+        dispatch(setIsRedirect(true))
         }
     )
 }
@@ -93,15 +100,16 @@ export const updateTodoItemTC = (todoItemId: number, editComplete: boolean, edit
     todolistApi.updateTodoItem(todoItemId, editComplete, editTitle).then(res => {
         dispatch(updateTodoItemAC(todoItemId, editComplete, editTitle))
         dispatch(setAppStatusAC('succeeded'))
+        dispatch(setIsRedirect(true))
     }).catch(err => {
         dispatch(setAppStatusAC('succeeded'))
+        dispatch(setIsRedirect(true))
     })
 }
 
 
 
 export type todoItemBodyType = {
-    user_id: number
     title: string
     complete: boolean
 }

@@ -10,7 +10,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Redirect} from "react-router";
 import {Preloader} from "./components/preloader/Preloader";
 import {AppStateType} from "./redux/reduxStore";
-import { setIsAuth } from './redux/isAuthReducer';
+import {setIsAuth, setIsRedirect} from './redux/isAuthReducer';
 import axios from 'axios';
 import {setUserData} from "./redux/userDataReducer";
 
@@ -43,8 +43,10 @@ function App() {
               'token-type': 'Bearer'  
           }}).then(res => {
               dispatch(setUserData(res.data));
+              dispatch(setIsRedirect(true))
               dispatch(setIsAuth(true))
           }).catch(err => {
+              dispatch(setIsRedirect(true))
               dispatch(setIsAuth(false));
               localStorage.clear()
             })
