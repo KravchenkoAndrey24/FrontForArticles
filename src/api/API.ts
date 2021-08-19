@@ -2,14 +2,17 @@ import axios from 'axios'
 import { todoItemBodyType } from '../redux/todolistReducer';
 
 
-// axios.defaults.baseURL = 'http://localhost:3000/';
-axios.defaults.baseURL = 'https://shrouded-caverns-92109.herokuapp.com/';
+axios.defaults.baseURL = 'http://localhost:3000/';
+// axios.defaults.baseURL = 'https://shrouded-caverns-92109.herokuapp.com/';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 const token = {
     set(token: any) {
         axios.defaults.headers = {...token};
     },
+    unset(){
+        axios.defaults.headers = '';
+    }
 };
 
 export const authAPI = {
@@ -57,6 +60,8 @@ export const todolistApi = {
         if(localRawToken) {
             const localToken = JSON.parse(localRawToken)
             token.set(localToken)
+        } else {
+            token.unset()
         }
     },
     getTodolist(){
@@ -72,6 +77,7 @@ export const todolistApi = {
         return axios.delete(`api/v1/todo_items/${todoItemId}`)
     },
     updateTodoItem(todoItemId: number, edit_complete: boolean, edit_title: string, ) {
+        this.getTokenFromLocal()
         return axios.put(`api/v1/todo_items/${todoItemId}`, {edit_complete, edit_title })
     }
 }

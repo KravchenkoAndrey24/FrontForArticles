@@ -1,7 +1,7 @@
 import {Dispatch} from "redux";
 import { setAppStatusAC } from "./appReducer";
 import {todolistApi} from "../api/API";
-import {setIsRedirect} from "./isAuthReducer";
+import {setIsAuth, setIsRedirect} from "./isAuthReducer";
 
 export enum ACTION_TYPES {
     SET_TODOLIST = "SET_TODOLIST",
@@ -34,7 +34,6 @@ export const todolistReducer = (state: initialStateType = initialState, action: 
         case ACTION_TYPES.DELETE_TODO_ITEM:
             return state.filter(item => item.id !== action.todoItemId)
         case ACTION_TYPES.UPDATE_TODO_ITEM:
-
             return state.filter(item => {
                 if (item.id === action.todoItemId) {
                     item.title = action.editTitle
@@ -63,6 +62,7 @@ export const setTodolistTC = () => (dispatch: Dispatch) => {
         dispatch(setAppStatusAC('succeeded'))
         dispatch(setIsRedirect(true))
     }).catch( err => {
+        dispatch(setIsAuth(false))
         dispatch(setAppStatusAC('succeeded'))
         dispatch(setIsRedirect(true))
         }
@@ -76,6 +76,7 @@ export const addTodoItemTC = (todoItemBody: todoItemBodyType) => (dispatch: Disp
         dispatch(setAppStatusAC('succeeded'))
         dispatch(setIsRedirect(true))
     }).catch( err => {
+        dispatch(setIsAuth(false))
         dispatch(setAppStatusAC('succeeded'))
         dispatch(setIsRedirect(true))
         }
@@ -89,6 +90,7 @@ export const deleteArticleTC = (todoItemId: number) => (dispatch: Dispatch) => {
         dispatch(setAppStatusAC('succeeded'))
         dispatch(setIsRedirect(true))
     }).catch(err => {
+        dispatch(setIsAuth(false))
         dispatch(setAppStatusAC('succeeded'))
         dispatch(setIsRedirect(true))
         }
@@ -102,6 +104,7 @@ export const updateTodoItemTC = (todoItemId: number, editComplete: boolean, edit
         dispatch(setAppStatusAC('succeeded'))
         dispatch(setIsRedirect(true))
     }).catch(err => {
+        dispatch(setIsAuth(false))
         dispatch(setAppStatusAC('succeeded'))
         dispatch(setIsRedirect(true))
     })
