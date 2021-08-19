@@ -10,10 +10,16 @@ export const TodoForm = () => {
 
 
     const createNewTodoItem = () => {
-        dispatch(addTodoItemTC({title: itemTitle, complete: false}))
-        setItemTitle('')
+        if(itemTitle){
+            dispatch(addTodoItemTC({title: itemTitle, complete: false}))
+            setItemTitle('')
+        }
     }
-
+    const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if(e.code === 'Enter'){
+            createNewTodoItem()
+        }
+    }
 
      return (
             <div className="my-3">
@@ -24,6 +30,7 @@ export const TodoForm = () => {
                             type="text"
                             name="title"
                             required
+                            onKeyPress={onKeyPressHandler}
                             className="form-control"
                             id="title"
                             placeholder="Write your todo item here..."

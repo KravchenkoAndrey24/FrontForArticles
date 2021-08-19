@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import { setAppStatusAC } from "./appReducer";
+import {setAppStatusAC, setErrorsAC} from "./appReducer";
 import {todolistApi} from "../api/API";
 import {setIsAuth, setIsRedirect} from "./isAuthReducer";
 
@@ -62,6 +62,7 @@ export const setTodolistTC = () => (dispatch: Dispatch) => {
         dispatch(setAppStatusAC('succeeded'))
         dispatch(setIsRedirect(true))
     }).catch( err => {
+        dispatch(setErrorsAC(err?.response?.data?.errors[0]))
         dispatch(setIsAuth(false))
         dispatch(setAppStatusAC('succeeded'))
         dispatch(setIsRedirect(true))
@@ -76,6 +77,7 @@ export const addTodoItemTC = (todoItemBody: todoItemBodyType) => (dispatch: Disp
         dispatch(setAppStatusAC('succeeded'))
         dispatch(setIsRedirect(true))
     }).catch( err => {
+        dispatch(setErrorsAC(err?.response?.data?.errors[0]))
         dispatch(setIsAuth(false))
         dispatch(setAppStatusAC('succeeded'))
         dispatch(setIsRedirect(true))
@@ -90,6 +92,7 @@ export const deleteArticleTC = (todoItemId: number) => (dispatch: Dispatch) => {
         dispatch(setAppStatusAC('succeeded'))
         dispatch(setIsRedirect(true))
     }).catch(err => {
+        dispatch(setErrorsAC(err?.response?.data?.errors[0]))
         dispatch(setIsAuth(false))
         dispatch(setAppStatusAC('succeeded'))
         dispatch(setIsRedirect(true))
@@ -104,6 +107,7 @@ export const updateTodoItemTC = (todoItemId: number, editComplete: boolean, edit
         dispatch(setAppStatusAC('succeeded'))
         dispatch(setIsRedirect(true))
     }).catch(err => {
+        dispatch(setErrorsAC(err?.response?.data?.errors[0]))
         dispatch(setIsAuth(false))
         dispatch(setAppStatusAC('succeeded'))
         dispatch(setIsRedirect(true))

@@ -19,7 +19,10 @@ export const TodoItem = (props: TodoItemType) => {
         dispatch(updateTodoItemTC(props.todoItem.id, e.currentTarget.checked, title))
         setComplete(e.currentTarget.checked)
     }
-    const changeTitleValue = (e: ChangeEvent<HTMLInputElement>) => {
+    const setTitleValue = () => {
+        if(!title){
+            dispatch(deleteArticleTC(props.todoItem.id))
+        }
         dispatch(updateTodoItemTC(props.todoItem.id, complete,  title))
     }
 
@@ -52,7 +55,7 @@ export const TodoItem = (props: TodoItemType) => {
                 </td>
                 <td style={{borderBottom: '0px'}}>
                     <input
-                        onBlur={changeTitleValue}
+                        onBlur={setTitleValue}
                         value={title}
                         onChange={(e)=>setTitle(e.currentTarget.value)}
                         type="text"
