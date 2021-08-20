@@ -37,7 +37,7 @@ export const TodoForm = () => {
                             value={itemTitle}
                         />
                     </div>
-                    <div className="form-group col-md-4">
+                    <div className="form-group col-md-4 mt-2">
                         <button onClick={createNewTodoItem} className="btn btn-outline-success btn-block">
                             Add To Do Item
                         </button>

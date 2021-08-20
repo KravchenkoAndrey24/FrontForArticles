@@ -27,7 +27,7 @@ export const authAPI = {
         localStorage.clear()
             return axios.post('api/v1/auth/sign_in', data).then(res => {
                 localStorage.setItem('token', JSON.stringify(res.headers))
-                token.set(res.headers.authorization);
+                token.set(res.headers);
                 return  res.data.data
             })
     },

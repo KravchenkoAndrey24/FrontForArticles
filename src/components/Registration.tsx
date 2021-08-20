@@ -8,6 +8,7 @@ import {useForm} from "react-hook-form";
 import {RegistrationDataType} from "../api/API";
 import { registrationTC } from '../redux/userDataReducer';
 import {setAppStatusAC, setErrorsAC} from "../redux/appReducer";
+import {NavLink} from "react-router-dom";
 
 const Registration = () => {
 
@@ -51,6 +52,12 @@ const Registration = () => {
                         <button className={style.loginButton} type={'submit'}>Sign up</button>
                         <a onClick={()=>{dispatch(setAppStatusAC('loading'))}} className={style.signInGit} href="https://shrouded-caverns-92109.herokuapp.com/api/v1/auth/github">Sign up with GitHub</a>
                 </form>
+                <div className={style.askAboutAccount}>
+                    <span>Do you have an account?</span>
+                </div>
+                <div className={style.singUp}>
+                    <span><NavLink to={PATH.login}>Sign In</NavLink></span>
+                </div>
             </div>
         </div>
     );

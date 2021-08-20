@@ -23,10 +23,9 @@ export const PATH = {
 function App() {
     const dispatch = useDispatch();
     const status = useSelector<AppStateType>(state => state.app.status)
-
     const location = useLocation()
     const rawToken = new URLSearchParams(location.search).get('token');
- 
+    console.log('app')
     useEffect(() => {
         if(rawToken){
             const decodeToken = atob(rawToken)

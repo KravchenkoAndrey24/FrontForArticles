@@ -16,10 +16,14 @@ export const Todolist = () => {
     const isAuth = useSelector<AppStateType, boolean>(state=>state.isAuth.isAuth);
     const state = useSelector<AppStateType, TodolistType[]>(state => state.todolist)
     const isRedirect = useSelector<AppStateType, boolean>(state => state.isAuth.isRedirect);
+    const status = useSelector<AppStateType>(state => state.app.status)
+    console.log('todolist')
 
     useEffect(()=>{
+        if(isAuth && status !== 'loading' ){
             dispatch(setTodolistTC());
-    }, [dispatch])
+        }
+    }, [dispatch, isAuth])
 
 
     if(isRedirect && !isAuth){

@@ -55,7 +55,6 @@ export const updateTodoItemAC = (todoItemId: number, editComplete: boolean, edit
 
 
 export const setTodolistTC = () => (dispatch: Dispatch) => {
-
     dispatch(setAppStatusAC('loading'))
     todolistApi.getTodolist().then(res => {
         dispatch(setTodolistAC(res.data))

@@ -175,9 +175,9 @@
         width: 100%;
     }
     .formInputError {
-         font-size: 13px;
-         left: 0px;
-         top: -14px;
+        font-size: 13px;
+        left: 0px;
+        top: -14px;
      }
 }
 @media (max-width: 350px) {

@@ -53,8 +53,6 @@ export const loginTC = (data: RegistrationDataType) => (dispatch: Dispatch) => {
             dispatch(setIsRedirect(true))
         })
         .catch((error) => {
-            console.log(error.message)
-
             dispatch(setErrorsAC(error?.response?.data?.errors[0]))
             dispatch(setAppStatusAC('succeeded'))
             dispatch(setIsAuth(false))
@@ -66,8 +64,8 @@ export const logoutTC = () => (dispatch: Dispatch) => {
     dispatch(setAppStatusAC('loading'))
     authAPI.logout()
         .then((res) => {
-            dispatch(setIsRedirect(true))
             dispatch(setIsAuth(false))
+            dispatch(setIsRedirect(true))
             dispatch(setAppStatusAC('succeeded'))
         })
         .catch((error) => {

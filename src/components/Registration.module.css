@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 .main {
-    height: 100vh;
+    min-height: 100vh;
     background: linear-gradient(180deg, #e6d4de 0%, #9890c7 100%);
     display: flex;
     justify-content: center;
@@ -81,7 +81,7 @@
     color: white;
     height: 35px;
     background: #2f36ae;
-    margin: 90px auto 20px;
+    margin: 50px auto 20px;
     border-radius: 30px;
     cursor: pointer;
     border: 0;
@@ -150,6 +150,40 @@
     text-decoration: none;
     font-size: 14px;
 }
+.askAboutAccount {
+    font-family: SF UI Display;
+    color: #9393a2;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.askAboutAccount span {
+    padding: 4px;
+}
+
+.singUp {
+    margin: 10px 0 30px 0;
+    cursor: pointer;
+}
+.singUp span {
+}
+.singUp a {
+    text-decoration: none;
+    color: black;
+    display: inline-block;
+    padding: 4px;
+}
+.singUp a:hover {
+    text-decoration: none;
+    color: black;
+    background-color: #e5e5e5;
+    border-radius: 20px;
+}
+.singUp span:hover {
+    cursor: pointer;
+}
 @media (max-width: 500px) {
     .main {
         align-items: flex-start;
@@ -168,7 +202,6 @@
         top: -14px;
     }
 }
-
 @media (max-width: 350px) {
     .mainBlock {
         margin: 50px 10px;
