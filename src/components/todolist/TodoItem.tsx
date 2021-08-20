@@ -22,8 +22,10 @@ export const TodoItem = (props: TodoItemType) => {
     const setTitleValue = () => {
         if(!title){
             dispatch(deleteArticleTC(props.todoItem.id))
+        } else {
+            dispatch(updateTodoItemTC(props.todoItem.id, complete,  title))
+
         }
-        dispatch(updateTodoItemTC(props.todoItem.id, complete,  title))
     }
 
 

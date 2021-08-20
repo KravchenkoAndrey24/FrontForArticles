@@ -37,7 +37,7 @@ export const registrationTC = (data: RegistrationDataType) => (dispatch: Dispatc
         dispatch(setAppStatusAC('succeeded'))
         dispatch(setIsRedirect(true))
     }).catch((error) => {
-        dispatch(setErrorsAC(error?.response.data?.errors?.full_messages[0]))
+        dispatch(setErrorsAC(error?.response?.data?.errors?.full_messages[0]))
         dispatch(setAppStatusAC('succeeded'))
         dispatch(setIsRedirect(true))
     })
@@ -53,6 +53,8 @@ export const loginTC = (data: RegistrationDataType) => (dispatch: Dispatch) => {
             dispatch(setIsRedirect(true))
         })
         .catch((error) => {
+            console.log(error)
+
             dispatch(setErrorsAC(error?.response?.data?.errors[0]))
             dispatch(setAppStatusAC('succeeded'))
             dispatch(setIsAuth(false))

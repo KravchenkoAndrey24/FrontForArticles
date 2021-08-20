@@ -107,7 +107,9 @@ export const updateTodoItemTC = (todoItemId: number, editComplete: boolean, edit
         dispatch(setAppStatusAC('succeeded'))
         dispatch(setIsRedirect(true))
     }).catch(err => {
-        dispatch(setErrorsAC(err?.response?.data?.errors[0]))
+        if(err.response.data.errors){
+            dispatch(setErrorsAC(err.response.data.errors[0]))
+        }
         dispatch(setIsAuth(false))
         dispatch(setAppStatusAC('succeeded'))
         dispatch(setIsRedirect(true))

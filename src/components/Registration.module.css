@@ -69,11 +69,11 @@
     border-bottom: 2px solid orange;
 }
 .formInputError {
+    position: absolute;
     font-size: 14px;
     color: red;
-    margin: 0;
-    padding: 0;
-    margin-left: 40px;
+    top: -14px;
+    left: 40px;
 }
 .loginButton {
     display: block;
@@ -149,4 +149,18 @@
     text-align: center;
     text-decoration: none;
     font-size: 14px;
+}
+@media (max-width: 500px) {
+    .mainBlock {
+        min-height: 500px;
+        min-width: 300px;
+    }
+    .formInput input {
+        width: 100%;
+    }
+    .formInputError {
+        font-size: 13px;
+        left: 0px;
+        top: -14px;
+    }
 }
