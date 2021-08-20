@@ -7,7 +7,7 @@ import { PATH } from '../App';
 import { useForm } from 'react-hook-form'
 import {RegistrationDataType} from "../api/API";
 import { loginTC } from '../redux/userDataReducer';
-import {setErrorsAC} from "../redux/appReducer";
+import {setAppStatusAC, setErrorsAC} from "../redux/appReducer";
 
 export const Login = () => {
     const dispatch = useDispatch()
@@ -52,7 +52,7 @@ export const Login = () => {
                             {errors.password && <p className={style.formInputError}>Password must be more than 6 characters</p>}
                         </div>
                         <button className={style.loginButton} type={'submit'}>Sign in</button>
-                        <a className={style.signInGit} href="https://shrouded-caverns-92109.herokuapp.com/api/v1/auth/github">Sign in with GitHub</a>
+                        <a onClick={()=>{dispatch(setAppStatusAC('loading'))}} className={style.signInGit} href="https://shrouded-caverns-92109.herokuapp.com/api/v1/auth/github">Sign in with GitHub</a>
                     </form>
                     <div className={style.askAboutAccount}>
                         <span>Don’t have an account?</span>

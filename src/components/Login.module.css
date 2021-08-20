@@ -163,6 +163,9 @@
     color: red;
 }
 @media (max-width: 500px) {
+    .main {
+        align-items: flex-start;
+    }
     .mainBlock {
         min-height: 0px;
         min-width: 300px;
@@ -179,16 +182,6 @@
 }
 @media (max-width: 350px) {
     .mainBlock {
-        min-height: 0px;
-        min-width: 300px;
         margin: 50px 10px;
-    }
-    .formInput input {
-        width: 100%;
-    }
-    .formInputError {
-        font-size: 13px;
-        left: 0px;
-        top: -14px;
     }
 }
