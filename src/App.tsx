@@ -35,7 +35,7 @@ function App() {
         const localRawToken = localStorage.getItem('token')
         if(localRawToken){
             const token = JSON.parse(localRawToken)
-            axios.get('https://shrouded-caverns-92109.herokuapp.com/me', {headers: {
+            axios.get('http://localhost:3000/me', {headers: {
               'access-token': token['access-token'],
               'expiry': token.expiry,
               'client': token.client,

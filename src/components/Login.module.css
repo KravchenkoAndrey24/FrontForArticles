@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 .main {
-    height: 100vh;
+    min-height: 100vh;
     background: linear-gradient(180deg, #e6d4de 0%, #9890c7 100%);
     display: flex;
     justify-content: center;
@@ -164,8 +164,9 @@
 }
 @media (max-width: 500px) {
     .mainBlock {
-        min-height: 500px;
+        min-height: 0px;
         min-width: 300px;
+        margin: 50px 0px;
     }
     .formInput input {
         width: 100%;
@@ -175,4 +176,19 @@
          left: 0px;
          top: -14px;
      }
+}
+@media (max-width: 350px) {
+    .mainBlock {
+        min-height: 0px;
+        min-width: 300px;
+        margin: 50px 10px;
+    }
+    .formInput input {
+        width: 100%;
+    }
+    .formInputError {
+        font-size: 13px;
+        left: 0px;
+        top: -14px;
+    }
 }

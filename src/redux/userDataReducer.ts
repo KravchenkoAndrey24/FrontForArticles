@@ -53,7 +53,7 @@ export const loginTC = (data: RegistrationDataType) => (dispatch: Dispatch) => {
             dispatch(setIsRedirect(true))
         })
         .catch((error) => {
-            console.log(error)
+            console.log(error.message)
 
             dispatch(setErrorsAC(error?.response?.data?.errors[0]))
             dispatch(setAppStatusAC('succeeded'))
