@@ -53,7 +53,12 @@ export const loginTC = (data: RegistrationDataType) => (dispatch: Dispatch) => {
             dispatch(setIsRedirect(true))
         })
         .catch((error) => {
-            dispatch(setErrorsAC(error?.response?.data?.errors[0]))
+            if(error.message === 'Network Error'){
+                dispatch(setErrorsAC(error.message))
+            }
+            if(error?.response?.data?.errors){
+                dispatch(setErrorsAC(error?.response?.data?.errors[0]))
+            }
             dispatch(setAppStatusAC('succeeded'))
             dispatch(setIsAuth(false))
             dispatch(setIsRedirect(true))
@@ -64,13 +69,9 @@ export const logoutTC = () => (dispatch: Dispatch) => {
     dispatch(setAppStatusAC('loading'))
     authAPI.logout()
         .then((res) => {
+            dispatch(setIsRedirect(true))
             dispatch(setIsAuth(false))
-            dispatch(setIsRedirect(true))
             dispatch(setAppStatusAC('succeeded'))
-        })
-        .catch((error) => {
-            dispatch(setAppStatusAC('succeeded'))
-            dispatch(setIsRedirect(true))
         })
 }
 

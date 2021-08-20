@@ -25,7 +25,7 @@ function App() {
     const status = useSelector<AppStateType>(state => state.app.status)
     const location = useLocation()
     const rawToken = new URLSearchParams(location.search).get('token');
-    console.log('app')
+
     useEffect(() => {
         if(rawToken){
             const decodeToken = atob(rawToken)
@@ -50,9 +50,8 @@ function App() {
               localStorage.clear()
             })
         }
-    }, [rawToken]);
+    }, [dispatch, rawToken]);
 
-  
   return (
     <div className="App">
         <div className={style.navBar}><Navbar /></div>

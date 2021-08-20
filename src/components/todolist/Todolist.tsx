@@ -17,19 +17,24 @@ export const Todolist = () => {
     const state = useSelector<AppStateType, TodolistType[]>(state => state.todolist)
     const isRedirect = useSelector<AppStateType, boolean>(state => state.isAuth.isRedirect);
     const status = useSelector<AppStateType>(state => state.app.status)
-    console.log('todolist')
 
     useEffect(()=>{
-        if(isAuth && status !== 'loading' ){
+        const tokenLocal = localStorage.getItem('token')
+        if(!tokenLocal){
+            dispatch(setTodolistTC());
+        }
+    }, [dispatch])
+
+    useEffect(()=>{
+        if(isAuth && status !== 'loading'){
             dispatch(setTodolistTC());
         }
     }, [dispatch, isAuth])
-
-
     if(isRedirect && !isAuth){
         return <Redirect to={PATH.login} />
     }
     const toggleCompletedTodoItems = () => setHideCompletedTodoItems(prev => !prev)
+
     return (
         <div className={style.main}>
             <TodoForm />

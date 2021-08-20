@@ -1,9 +1,5 @@
 import React from 'react'
 
-type TodoItemsType = {
-    hideCompletedTodoItems: boolean
-    toggleCompletedTodoItems: ()=>{}
-}
 
 const TodoItems = (props: any) => {
 

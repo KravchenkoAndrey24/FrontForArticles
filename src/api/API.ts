@@ -32,6 +32,10 @@ export const authAPI = {
             })
     },
     logout(){
+        let tokenLocal = localStorage.getItem('token')
+        if(tokenLocal){
+            token.set(JSON.parse(tokenLocal))
+        }
         return axios.delete('api/v1/auth/sign_out').then(res => {
             localStorage.clear()
         }).catch(err => {
