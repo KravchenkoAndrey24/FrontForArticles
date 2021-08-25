@@ -15,7 +15,7 @@ const TodoItems = (props: any) => {
                     : `Hide Completed Items `}
             </button>
             <div className="table-responsive">
-                <table className="table">
+                <table className="table table-hover ">
                     <thead>
                     <tr>
                         <th scope="col">Status</th>

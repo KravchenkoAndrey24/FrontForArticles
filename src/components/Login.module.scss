@@ -1,12 +1,16 @@
+$background-color: linear-gradient(180deg, #e6d4de 0%, #9890c7 100%);
 * {
     box-sizing: border-box;
 }
 .main {
     min-height: 100vh;
-    background: linear-gradient(180deg, #e6d4de 0%, #9890c7 100%);
+    background: $background-color;
     display: flex;
     justify-content: center;
     align-items: center;
+    @media (max-width: 500px) {
+        align-items: flex-start;
+    }
 }
 .mainBlock {
     min-height: 500px;
@@ -15,6 +19,14 @@
     border-radius: 10px;
     text-align: center;
     margin: 50px 0px;
+    @media (max-width: 500px) {
+        min-height: 0px;
+        min-width: 300px;
+        margin: 50px 0px;
+    }
+    @media (max-width: 350px) {
+        margin: 50px 10px;
+    }
 }
 .title {
     margin-top: 45px;
@@ -44,52 +56,34 @@
     text-align: center;
     margin-bottom: 25px;
     position: relative;
-}
-.photoEye {
-    position: absolute;
-    width: 32px;
-    height: 32px;
-    background: url("https://s1.1zoom.ru/big0/301/Eyes_Painting_Art_Eyelash_lash_Glance_White_522554_1024x1024.jpg") 0 0 /
-    contain no-repeat;
-    right: 37px;
-    top: -8px;
-    cursor: pointer;
+    input {
+        width: 80%;
+        padding: 5px;
+        border: 0;
+        border-bottom: 2px solid grey;
+        outline: none;
+        @media (max-width: 500px) {
+            width: 100%;
+        }
+    }
+    input:focus {
+        border-bottom: 2px solid orange;
+    }
 }
 
-.formInput input {
-    width: 80%;
-    padding: 5px;
-    border: 0;
-    border-bottom: 2px solid grey;
-    outline: none;
-}
-.formInput input:focus {
-    border-bottom: 2px solid orange;
-}
 .formInputError {
     position: absolute;
     font-size: 14px;
     color: red;
     left: 40px;
     top: -14px;
+    @media (max-width: 500px) {
+        font-size: 13px;
+        left: 0px;
+        top: -14px;
+    }
 }
-.forgotPassword {
-    margin-top: 45px;
-    text-align: right;
-    font-family: SF UI Display;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 17px;
-}
-.forgotPassword span {
-    padding: 4px;
-}
-.forgotPassword span:hover {
-    border-radius: 15px;
-    cursor: pointer;
-    background-color: #e5e5e5;
-}
+
 .loginButton {
     display: block;
     min-width: 260px;
@@ -100,15 +94,14 @@
     border-radius: 30px;
     cursor: pointer;
     border: 0;
-}
-.loginButton:hover {
-    background-color: #131771;
-}
-.loginButton:active {
-    background-color: #080b44;
+    &:hover {
+        background-color: #131771;
+    };
+    &:active {
+        background-color: #080b44;
+    };
 }
 .signInGit {
-    display: block;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -123,6 +116,13 @@
     text-align: center;
     text-decoration: none;
     font-size: 14px;
+    &:hover {
+        background-color: #131771;
+        color: white;
+    };
+    &:active {
+        background-color: #080b44;
+    };
 }
 .askAboutAccount {
     font-family: SF UI Display;
@@ -131,58 +131,31 @@
     font-weight: 600;
     font-size: 14px;
     line-height: 24px;
+    span {
+        padding: 4px;
+    }
 }
 
-.askAboutAccount span {
-    padding: 4px;
-}
 
 .singUp {
     margin: 10px 0 30px 0;
     cursor: pointer;
-}
-.singUp span {
-}
-.singUp a {
-    text-decoration: none;
-    color: black;
-    display: inline-block;
-    padding: 4px;
-}
-.singUp a:hover {
-    text-decoration: none;
-    color: black;
-    background-color: #e5e5e5;
-    border-radius: 20px;
-}
-.singUp span:hover {
-    cursor: pointer;
+    a {
+        text-decoration: none;
+        color: black;
+        display: inline-block;
+        padding: 4px;
+    }
+    a:hover {
+        text-decoration: none;
+        color: black;
+        background-color: #e5e5e5;
+        border-radius: 20px;
+    }
 }
 .formError {
     display: block;
     text-align: center;
     color: red;
 }
-@media (max-width: 500px) {
-    .main {
-        align-items: flex-start;
-    }
-    .mainBlock {
-        min-height: 0px;
-        min-width: 300px;
-        margin: 50px 0px;
-    }
-    .formInput input {
-        width: 100%;
-    }
-    .formInputError {
-        font-size: 13px;
-        left: 0px;
-        top: -14px;
-     }
-}
-@media (max-width: 350px) {
-    .mainBlock {
-        margin: 50px 10px;
-    }
-}
+

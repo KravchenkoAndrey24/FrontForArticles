@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './Login.module.css';
+import style from './Login.module.scss';
 import { useDispatch, useSelector } from "react-redux";
 import {NavLink, Redirect } from 'react-router-dom';
 import { AppStateType } from '../redux/reduxStore';
