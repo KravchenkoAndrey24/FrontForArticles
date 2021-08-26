@@ -7,7 +7,7 @@ export enum ACTION_TYPES {
 
 export type ProfileActionsType = ReturnType<typeof setIsAuth> | ReturnType<typeof setIsRedirect>
 
-let initialState = {
+const initialState = {
     isAuth: false,
     isRedirect: false
 };
