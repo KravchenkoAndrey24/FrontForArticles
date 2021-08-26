@@ -13,6 +13,8 @@ import {AppStateType} from "./redux/reduxStore";
 import {setIsAuth, setIsRedirect} from './redux/isAuthReducer';
 import axios from 'axios';
 import {setUserData} from "./redux/userDataReducer";
+import { DragDropContext } from 'react-beautiful-dnd';
+import {updateIndexTodoItemAC} from "./redux/todolistReducer";
 
 export const PATH = {
     registration: '/registration',
@@ -34,7 +36,7 @@ function App() {
         const localRawToken = localStorage.getItem('token')
         if(localRawToken){
             const token = JSON.parse(localRawToken)
-            axios.get('https://shrouded-caverns-92109.herokuapp.com/me', {headers: {
+            axios.get('http://localhost:3000/me', {headers: {
               'access-token': token['access-token'],
               'expiry': token.expiry,
               'client': token.client,
@@ -52,17 +54,32 @@ function App() {
         }
     }, [dispatch, rawToken]);
 
+
+    const onDragEnd = (result: any) => {
+        const {destination, source, draggableId} = result;
+        if(!destination){
+            return
+        }
+        if( destination.droppableId === source.droppableId &&
+            destination.index === source.index
+        ){
+            return;
+        }
+        dispatch(updateIndexTodoItemAC(destination, source, draggableId))
+    }
   return (
-    <div className="App">
-        <div className={style.navBar}><Navbar /></div>
-        {status === 'loading' && <div className={style.preLoader}><Preloader /></div>}
-      <Switch>
-          <Route path={PATH.registration} render={() => <Registration />} />
-          <Route path={PATH.login} render={() => <Login />} />
-          <Route path={PATH.todolist} render={() => <Todolist />} />
-          <Redirect to={PATH.login} />
-      </Switch>
-    </div>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <div className="App">
+            <div className={style.navBar}><Navbar /></div>
+            {status === 'loading' && <div className={style.preLoader}><Preloader /></div>}
+          <Switch>
+              <Route path={PATH.registration} render={() => <Registration />} />
+              <Route path={PATH.login} render={() => <Login />} />
+              <Route path={PATH.todolist} render={() => <Todolist />} />
+              <Redirect to={PATH.login} />
+          </Switch>
+        </div>
+      </DragDropContext>
   );
 }
 

@@ -8,14 +8,18 @@ export const TodoForm = () => {
     const dispatch = useDispatch();
     const [itemTitle, setItemTitle] = useState<string>('')
     const [errorTitle, setErrorTitle] = useState<string>('')
-
     const createNewTodoItem = () => {
-        if(itemTitle){
-            dispatch(addTodoItemTC({title: itemTitle, complete: false}))
+        if(itemTitle.trim() !== ''){
+            dispatch(addTodoItemTC({title: itemTitle.trim(), complete: false}))
             setItemTitle('')
         } else {
             setErrorTitle('Enter Valid Title')
+            setItemTitle('')
         }
+    }
+    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setErrorTitle('')
+        setItemTitle(e.currentTarget.value)
     }
     const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if(e.code === 'Enter'){
@@ -23,21 +27,20 @@ export const TodoForm = () => {
         }
         setErrorTitle('')
     }
-
      return (
             <div className="my-3">
                 <div className="form-row">
                     <div className="form-group form-floating  col-md-8" style={{display: "block"}}>
                         <input
-                            onChange={(e)=>setItemTitle(e.currentTarget.value)}
-                            defaultValue={itemTitle}
+                            onChange={onChangeHandler}
+                            value={itemTitle}
                             type="text"
                             name="title"
                             required
+                            onBlur={()=>setErrorTitle('')}
                             onKeyPress={onKeyPressHandler}
                             className={`form-control ${errorTitle ? 'is-invalid' : ''}`}
                             placeholder={'Create New Todo Item'}
-                            value={itemTitle}
                             id="floatingInput"
                         />
                         <label className={`${errorTitle ? `${style.labelColor}` : ''}`} htmlFor='floatingInput'>{errorTitle ? errorTitle  : 'Create New Todo Item'}</label>

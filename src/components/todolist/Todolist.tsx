@@ -17,7 +17,6 @@ export const Todolist = () => {
     const state = useSelector<AppStateType, TodolistType[]>(state => state.todolist)
     const isRedirect = useSelector<AppStateType, boolean>(state => state.isAuth.isRedirect);
     const status = useSelector<AppStateType>(state => state.app.status)
-
     useEffect(()=>{
         const tokenLocal = localStorage.getItem('token')
         if(!tokenLocal){
@@ -38,19 +37,18 @@ export const Todolist = () => {
     return (
         <div className={style.main}>
             <TodoForm />
-            <TodoItems toggleCompletedTodoItems={toggleCompletedTodoItems} hideCompletedTodoItems={hideCompletedTodoItems}>
-                {state.map(item => {
-                    return <TodoItem
-                        key={item.id}
-                        todoItem={item}
-                        hideCompletedTodoItems={hideCompletedTodoItems}
-                    />
-                })}
-            </TodoItems>
-
+                <TodoItems toggleCompletedTodoItems={toggleCompletedTodoItems} hideCompletedTodoItems={hideCompletedTodoItems}>
+                    {state.map((item, index) => {
+                        return <TodoItem
+                            key={item.id}
+                            index={+index}
+                            todoItem={item}
+                            hideCompletedTodoItems={hideCompletedTodoItems}
+                        />
+                    })}
+                </TodoItems>
         </div>
     )
-
 }
 
 
