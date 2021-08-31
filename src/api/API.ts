@@ -50,6 +50,7 @@ export const authAPI = {
             localStorage.clear()
         }
         return axios.get('current_user', ).then(res => {
+            debugger
             return res.data
         }).catch(err => {
             localStorage.clear()

@@ -3,10 +3,9 @@ import { Droppable } from 'react-beautiful-dnd'
 
 
 const TodoItems = (props: any) => {
-
     return (
         <Droppable droppableId={'1'}>
-        {(provider) => (
+        {(provider, snapshot) => (
             <>
                 <hr />
                 <button
@@ -18,7 +17,7 @@ const TodoItems = (props: any) => {
                         : `Hide Completed Items `}
                 </button>
                 <div className="table-responsive">
-                    <table className="table table-hover ">
+                    <table className="table table-hover">
                         <thead>
                         <tr>
                             <th scope="col">Status</th>
@@ -28,7 +27,13 @@ const TodoItems = (props: any) => {
                             </th>
                         </tr>
                         </thead>
-                        <tbody ref={provider.innerRef} {...provider.droppableProps}>{props.children}</tbody>
+                        <tbody
+                            ref={provider.innerRef}
+                            {...provider.droppableProps}
+                            className={ snapshot.isDraggingOver ? '' : ''}
+                        >
+                            {props.children}
+                        </tbody>
                     </table>
                 </div>
                 {provider.placeholder}

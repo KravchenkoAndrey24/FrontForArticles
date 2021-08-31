@@ -31,10 +31,15 @@ export const TodoItem = (props: TodoItemType) => {
 
         return (
             <Draggable draggableId={props.todoItem.id.toString()} index={props.index}>
-                {(provider) => (
-                    <tr ref={provider.innerRef} {...provider.draggableProps} {...provider.dragHandleProps}
+                {(provider, snapshot) => (
+                    <tr
+                        {...provider.draggableProps}
+                        {...provider.dragHandleProps}
+                        ref={provider.innerRef}
                         className={`${ props.todoItem.complete && props.hideCompletedTodoItems ? `d-none` : "" } 
-                                    ${!props.todoItem.complete ? "table-light" : ""}`}
+                                    ${!props.todoItem.complete ? "table-light" : ""}
+                                    ${snapshot.isDragging ? '' : ''}
+                                    `}
                     >
                         <td style={{borderBottom: '0px'}}>
                             <svg
@@ -58,13 +63,13 @@ export const TodoItem = (props: TodoItemType) => {
                             </svg>
                         </td>
                         <td style={{borderBottom: '0px'}}>
-                            <input
-                                onBlur={setTitleValue}
-                                value={title}
-                                onChange={(e)=>setTitle(e.currentTarget.value)}
-                                type="text"
-                                className="form-control"
-                            />
+                                <input
+                                    onBlur={setTitleValue}
+                                    value={title}
+                                    onChange={(e)=>setTitle(e.currentTarget.value)}
+                                    type="text"
+                                    className="form-control"
+                                />
                         </td >
                         <td className="text-right" style={{borderBottom: '0px'}}>
                             <div className="form-check form-check-inline">
