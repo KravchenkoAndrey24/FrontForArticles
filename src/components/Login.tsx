@@ -53,7 +53,7 @@ export const Login = () => {
                         </div>
                         <button className={style.loginButton} type={'submit'}>Sign in</button>
                         <a onClick={()=>{dispatch(setAppStatusAC('loading'))}} className={style.signInGit} href="https://shrouded-caverns-92109.herokuapp.com/api/v1/auth/github">Sign in with GitHub</a>
-                        <a onClick={()=>{dispatch(setAppStatusAC('loading'))}} className={style.signInGit}  href="http://localhost:3000/api/v1/auth/google_oauth2">Sign in with Google</a>
+                        <a onClick={()=>{dispatch(setAppStatusAC('loading'))}} className={style.signInGit}  href="https://shrouded-caverns-92109.herokuapp.com/api/v1/auth/google_oauth2">Sign in with Google</a>
                     </form>
                     <div className={style.askAboutAccount}>
                         <span>Don’t have an account?</span>
